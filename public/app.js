@@ -1,10 +1,9 @@
 document.addEventListener('click', ({ target }) => {
   if (target.dataset.type === 'update') {
-    baseValue = target.closest('li').innerHTML;
     let currentTitle = target.closest('li').firstChild.textContent.trim();
     target.closest('li').innerHTML = `
 
-            <input type="text" value="${currentTitle}" />
+            <input type="text" value="${currentTitle}" data-current="${currentTitle}" />
             <div>
               <button class="btn btn-success" data-type="save" data-id="${target.dataset.id}">Сохранить</button>
               <button class="btn btn-danger" data-type="cancel" data-id="${target.dataset.id}">Отменить</button>
@@ -36,7 +35,7 @@ document.addEventListener('click', ({ target }) => {
   }
 
   if (target.dataset.type === 'cancel') {
-    const title = target.closest('li').querySelector('input').value
+    const title = target.closest('li').querySelector('input').dataset.current
     target.closest('li').innerHTML = `
             ${title}
             <div>
